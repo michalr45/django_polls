@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    {{ poll.text }}
+</div>
+
+<div>
+    <form action="{% url 'polls:poll_vote' poll.slug %}" method="POST">
+        {% csrf_token %}
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        {% for answer in answers %}
+            <input type="radio" name="answer" id="answer{{ forloop.counter }}" value="{{ answer.id }}">
+            <label for="answer{{ forloop.counter }}">{{ answer.answer_text }}</label><br>
+        {% endfor %}
+        <input type="submit" value="vote">
+    </form>
+</div>
+
+<div>
+    <p>Share poll: {{ poll.get_absolute_url }}</p>
+</div>
+
+</body>
+</html>

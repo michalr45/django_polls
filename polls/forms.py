@@ -22,4 +22,3 @@ AnswerFormset = modelformset_factory(Answer,
                                      extra=1,
                                      widgets={'answer_text': forms.TextInput(attrs={'class': 'form-control',
                                                                                     'placeholder': 'Enter answer'})})
-

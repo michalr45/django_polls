@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from django.urls import reverse
 
 
 class Question(models.Model):
@@ -7,13 +8,18 @@ class Question(models.Model):
     slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
         if not self.slug:
             self.slug = slugify(self.text[0:10]) + "-" + str(self.id)
-            super().save(*args, **kwargs)
+            self.save()
+
+    def get_absolute_url(self):
+        return reverse('polls:poll_detail',
+                       args=[self.slug])
 
 
 class Answer(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')
     answer_text = models.CharField(max_length=100)
     votes = models.IntegerField(default=0)
 
