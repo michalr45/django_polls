@@ -1,0 +1,65 @@
+* {
+  box-sizing: border-box;
+}
+
+.form-control {
+  display: block;
+  width: 60%;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #fafafa;
+  border: 0;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  transition: 0.3s box-shadow;
+}
+
+.form-control:hover {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  border: 3px orange;
+}
+
+.submit-button {
+  background-image: linear-gradient(to right, #FF512F 0%, #F09819 51%, #FF512F 100%);
+  cursor: pointer;
+  border: none;
+  margin: 10px;
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+}
+
+.submit-button:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
+}
+
+.add-answer {
+  text-decoration: none;
+  background-color: cornflowerblue;
+  cursor: pointer;
+  border: none;
+  margin: 10px;
+  padding: 15px 15px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 50%;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+}
+
+.add-answer:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
+}
+
+/*# sourceMappingURL=create_poll.css.map */

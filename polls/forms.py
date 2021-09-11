@@ -8,7 +8,7 @@ class QuestionModelForm(forms.ModelForm):
         model = Question
         fields = ['text']
         widgets = {'text': forms.TextInput(attrs={'class': 'form-control',
-                                                  'placeholder': 'Enter Question'})}
+                                                  'placeholder': "Enter question"})}
 
 
 class AnswerModelForm(forms.ModelForm):

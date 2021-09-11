@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% load static %}
 <!DOCTYPE html>
 <html class="no-js" lang="en">
     <head>
@@ -7,20 +9,20 @@
         </title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {% block extra_css %}
+            <link rel="stylesheet" type="text/css" href="{% static 'css/create_poll.css' %}">
+        {% endblock %}
     </head>
 
 
 <body>
+{% block content %}
+<div>
     <form method="POST" action="">
         {% csrf_token %}
     <div>
-    <div>
-        <label>{{ question_form.text.label }}</label>
-    </div>
-    <div>
-        <div>
-            {{ question_form.text  }}
-        </div>
+    <div class="question-input">
+        {{ question_form.text  }}
     </div>
     </div>
     {{ answer_formset.management_form }}
@@ -33,12 +35,15 @@
         {{ answer_formset.empty_form.as_p }}
     </div>
     <div>
-        <input type="submit" value="Save">
-        <a class="add-new-form" href="#">Add new answer</a>
+        <input type="submit" value="Save poll" class="submit-button">
+        <a class="add-new-form" href="#"><button class="add-answer"><i class="fas fa-plus"></i></button></a>
     </div>
     </form>
+</div>
+{% endblock %}
 </body>
 
+{% block extra_js %}
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/color/jquery.color/jquery.color-2.1.2.min.js"></script>
@@ -93,5 +98,5 @@
 
 </script>
 
-
+{% endblock %}
 
