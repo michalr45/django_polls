@@ -1,16 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    {% block extra_css %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/poll_results.css' %}">
+    {% endblock %}
 </head>
 <body>
+{% block content %}
 
-<div>
-    {% for answer in poll.answers.all %}
-        {{ answer.answer_text }} - {{ answer.votes }}
-    {% endfor %}
-</div>
+<header>
+    <div class="header-text">
+        <h1>Results</h1>
+    </div>
+</header>
 
+<section>
+    <div class="container">
+        <div class="poll-question">
+            {{ poll.text }}
+        </div>
+        <div class="poll-results">
+            {% for answer in poll.answers.all %}
+                <p>{{ answer.answer_text }} - {{ answer.votes }}</p>
+            {% endfor %}
+        </div>
+        <div>
+            <p>Share poll: {{ poll.get_absolute_url }}</p>
+        </div>
+    </div>
+
+</section>
+
+
+{% endblock %}
 </body>
 </html>

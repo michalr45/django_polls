@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_css  %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1>Witaj, {{ new_user.username }}</h1>
+    <p>Twoje konto zostało utworzone, możesz się <a href="{% url 'login' %}">zalogować</a></p>
+{% endblock %}

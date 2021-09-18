@@ -17,29 +17,44 @@
 
 <body>
 {% block content %}
-<div>
-    <form method="POST" action="">
-        {% csrf_token %}
-    <div>
-    <div class="question-input">
-        {{ question_form.text  }}
+
+<header>
+    <div class="header-text">
+        {% if user.is_authenticated %}
+        {% else %}
+            <div class="info">
+                <span><i class="fas fa-info-circle"></i>&nbsp;&nbsp;&nbsp; log in to assign polls to your account
+                    and have them listed in your dashboard </span>
+            </div>
+        {% endif %}
+        <h1>Create <span class="name-color">your</span> poll</h1>
     </div>
-    </div>
-    {{ answer_formset.management_form }}
-    {% for form in answer_formset %}
-    <div class="form-row">
-        {{ form.as_p }}
-    </div>
-    {% endfor %}
-    <div class="form-row" id="empty-row" style="display: none">
-        {{ answer_formset.empty_form.as_p }}
-    </div>
-    <div>
-        <input type="submit" value="Save poll" class="submit-button">
-        <a class="add-new-form" href="#"><button class="add-answer"><i class="fas fa-plus"></i></button></a>
-    </div>
-    </form>
-</div>
+</header>
+
+<section>
+        <form method="POST" action="" class="create-poll-form">
+            <div class="create-poll">
+                {% csrf_token %}
+
+                {{ question_form.text  }}
+
+                {{ answer_formset.management_form }}
+                {% for form in answer_formset %}
+                <div class="form-row answer-form-div">
+                    {{ form.as_p }}
+                </div>
+                {% endfor %}
+                <div class="form-row answer-form-div" id="empty-row" style="display: none">
+                    {{ answer_formset.empty_form.as_p }}
+                </div>
+                <div>
+                    <input type="submit" value="Save poll" class="submit-button">
+                    <a class="add-new-form" href="#"><button class="add-answer"><i class="fas fa-plus"></i></button> Add answer</a>
+                </div>
+            </div>
+        </form>
+</section>
+
 {% endblock %}
 </body>
 

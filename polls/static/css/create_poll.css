@@ -2,21 +2,85 @@
   box-sizing: border-box;
 }
 
-.form-control {
-  display: block;
-  width: 60%;
+body {
+  position: relative;
+}
+
+header .header-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  text-align: center;
+  padding-bottom: 80px;
+  padding-top: 50px;
+}
+header .header-text .info {
+  margin-bottom: 30px;
+}
+header .header-text .info i {
+  color: cornflowerblue;
+  font-size: 22px;
+}
+header h1 {
+  text-transform: uppercase;
+}
+header .name-color {
+  color: cornflowerblue;
+}
+
+.create-poll {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  text-align: center;
+}
+.create-poll input[type=submit] {
+  font-family: "Montserrat", sans-serif;
+}
+.create-poll input[type=text], .create-poll textarea {
+  background-color: #ffff;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+}
+.create-poll input[type=text]:focus {
+  border: solid 2px cornflowerblue;
+}
+.create-poll textarea:focus {
+  border: solid 2px cornflowerblue;
+}
+.create-poll .answer-form-div {
+  width: 100%;
+}
+.create-poll .answer-form-div label {
+  display: none;
+}
+.create-poll .answer-form-div .answer-form {
+  overflow: hidden;
+  height: 62px;
+  font-size: 18px;
+  font-weight: 500;
+  border: solid 2px transparent;
+  font-family: "Montserrat", sans-serif;
+}
+.create-poll .question-form {
+  overflow: hidden;
+  height: 92px;
+  font-size: 18px;
+  font-weight: 500;
+  border: solid 2px transparent;
+  font-family: "Montserrat", sans-serif;
+}
+.create-poll .form-control {
+  display: inline-block;
+  width: 50%;
   margin: 10px 0;
   padding: 10px;
   border-radius: 10px;
-  background-color: #fafafa;
-  border: 0;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-  transition: 0.3s box-shadow;
-}
-
-.form-control:hover {
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
-  border: 3px orange;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.6);
 }
 
 .submit-button {
@@ -27,11 +91,12 @@
   padding: 15px 45px;
   text-align: center;
   text-transform: uppercase;
+  font-weight: bold;
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
   border-radius: 10px;
-  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
 }
 
 .submit-button:hover {
@@ -40,8 +105,11 @@
   text-decoration: none;
 }
 
-.add-answer {
+a {
   text-decoration: none;
+  color: black;
+}
+a .add-answer {
   background-color: cornflowerblue;
   cursor: pointer;
   border: none;
@@ -55,8 +123,7 @@
   border-radius: 50%;
   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
 }
-
-.add-answer:hover {
+a .add-answer:hover {
   background-position: right center;
   color: #fff;
   text-decoration: none;

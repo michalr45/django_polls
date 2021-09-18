@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from .forms import QuestionModelForm, AnswerModelForm, AnswerFormset
+from .forms import QuestionModelForm, AnswerFormset
 from .models import Question, Answer
 from django.shortcuts import redirect, HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 
 def create_poll(request):
@@ -13,7 +14,12 @@ def create_poll(request):
         question_form = QuestionModelForm(request.POST)
         answer_formset = AnswerFormset(request.POST)
         if question_form.is_valid() and answer_formset.is_valid():
-            question = question_form.save()
+            question = question_form.save(commit=False)
+            if request.user.is_authenticated:
+                question.user = request.user
+            else:
+                question.user = None
+            question.save()
             for form in answer_formset:
                 answer = form.save(commit=False)
                 answer.question = question
@@ -35,18 +41,38 @@ def poll_vote(request, slug):
     poll = get_object_or_404(Question, slug=slug)
     answers = poll.answers.all()
 
-    try:
-        selected_answer = poll.answers.get(pk=request.POST['answer'])
-    except(KeyError, Answer.DoesNotExist):
+    if f'vote_cookie_{poll.id}' in request.COOKIES.keys():
         return render(request, 'polls/poll_detail.html', {'poll': poll,
                                                           'answers': answers,
-                                                          'error_message': "Error!"})
+                                                          'error_message': "You already voted!"})
     else:
-        selected_answer.votes += 1
-        selected_answer.save()
-        return HttpResponseRedirect(reverse('polls:poll_results', args=[poll.slug]))
+        try:
+            selected_answer = poll.answers.get(pk=request.POST['answer'])
+        except(KeyError, Answer.DoesNotExist):
+            return render(request, 'polls/poll_detail.html', {'poll': poll,
+                                                              'answers': answers,
+                                                              'error_message': "Error!"})
+        else:
+            selected_answer.votes += 1
+            selected_answer.save()
+            response = HttpResponseRedirect(reverse('polls:poll_results', args=[poll.slug]))
+            response.set_cookie(f'vote_cookie_{poll.id}', str(poll.id))
+            return response
 
 
 def poll_results(request, slug):
     poll = get_object_or_404(Question, slug=slug)
     return render(request, 'polls/poll_results.html', {'poll': poll})
+
+
+@login_required
+def polls_dashboard(request):
+    polls = Question.objects.filter(user=request.user)
+    return render(request, 'polls/polls_dashboard.html', {'polls': polls})
+
+
+@login_required
+def delete_poll(request, slug):
+    poll = get_object_or_404(Question, slug=slug)
+    poll.delete()
+    return redirect('polls:polls_dashboard')
