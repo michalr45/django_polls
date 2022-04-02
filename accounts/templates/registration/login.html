@@ -13,18 +13,13 @@
         </div>
     </header>
 
-{#    {% if form.errors %}#}
-{#        <p>Nazwa użytkownika lub hasło są nieprawidłowe, Spróbuj ponownie</p>#}
-{#    {% endif %}#}
-
         <form action="{% url 'login' %}" method="post">
             {% csrf_token %}
             <div class="form-container">
                 <div class="form-div">
                     {{ form.as_p }}
                 </div>
-{#                <input type="hidden" name="next" value="{{ next }}">#}
-                <input type="submit" value="zaloguj" class="submit-button">
+                <input type="submit" value="log in" class="submit-button">
                 <p><a href="{% url 'password_reset' %}">Forgot password?</a></p>
             </div>
         </form>

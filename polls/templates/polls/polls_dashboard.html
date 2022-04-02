@@ -38,7 +38,7 @@
             <tbody>
                 {% for poll in polls %}
                 <tr>
-                    <td data-th="Date created">{{ poll.date_created |date:"D j-n-Y" }}</td>
+                    <td data-th="Date created">{{ poll.date_created |date:"D, j-n-Y" }}</td>
                     <td data-th="Question">{{ poll.text }}</td>
                     <td data-th="Top answer">{% get_top_answer poll %}</td>
                     <td data-th="Show answers"><a href="{{ poll.get_results_url }}">Show answers</a></td>
