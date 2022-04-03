@@ -16,8 +16,9 @@ Created using Django framework.
 ## Installation
 
 Clone this repository and install project dependencies in a virtual enviroment by running
-`pip install -r requirements.txt`
+`pip install -r requirements.txt` from project's root directory.
 
-To start the local server use this command: `python manage.py runserver` from project's root 
-directory.
+Run migrations: `python manage.py migrate`
+
+To start the local server use this command: `python manage.py runserver` 
     
