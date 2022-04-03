@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Witaj, {{ new_user.username }}</h1>
-    <p>Twoje konto zostało utworzone, możesz się <a href="{% url 'login' %}">zalogować</a></p>
+    <div class="form-container">
+        <h1>Hello, {{ new_user.username }}</h1>
+        <p>Your account is now active, you can <a href="{% url 'login' %}">log in here</a></p>
+    </div>
 {% endblock %}
